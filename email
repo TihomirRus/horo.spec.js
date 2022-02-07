@@ -1,0 +1,22 @@
+/// <reference types="cypress" />
+
+context('Actions', () => {
+  beforeEach(() => {
+    cy.visit('https://horo.mail.ru/prediction/aquarius/today/')
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      if (err.message.includes('ResizeObserver loop limit exceeded')) {
+        return false
+      }
+    })
+  })
+
+  // https://on.cypress.io/interacting-with-elements
+
+  it('.type() - type into a DOM element', () => {
+    // https://on.cypress.io/type
+    cy.get('input._756dee3138')
+      .type('antonvmikhailov@mail.ru').should('have.value', 'antonvmikhailov@mail.ru')
+
+      cy.get('button._57928466cb._0c3690b223._301b3aa0b0').click()
+  })    
+})
